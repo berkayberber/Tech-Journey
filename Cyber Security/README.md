@@ -1,31 +1,28 @@
-Cyber Security
+# Cyber Security
 
-Welcome to the Cyber Security folder. This folder contains key resources and documents related to topics we covered in our Cyber Security class, focusing on encryption, cryptographic algorithms, digital signatures, and related security concepts.
+Welcome to the **Cyber Security** folder. This repository contains essential resources and documents related to various topics covered in our **Cyber Security** course. The focus is on cryptographic techniques, digital signatures, block ciphers, key sizes, and the critical concepts necessary for modern cybersecurity practices.
 
-Topics Covered:
-Cryptographic Algorithms: We explored historical cryptographic algorithms and compared their effectiveness. Key algorithms such as DES, AES, and MARS were discussed.
+## Topics Covered
 
-Digital Signatures: A deep dive into digital signature execution and its time assessment was carried out to understand the practical implications of using digital signatures in security systems.
+### Cryptographic Algorithms
+We have explored several historical cryptographic algorithms and compared their effectiveness. Notable algorithms such as **DES**, **AES**, and **MARS** were discussed in depth to understand their strengths and weaknesses.
 
-Block Ciphers: A comparative study of block ciphers, including DES, IDEA, AES, and MARS, focusing on their entropy and security.
+### Digital Signatures
+A thorough analysis of **digital signatures** was conducted, including an assessment of their execution time. This helped us understand the practical implications of using digital signatures in real-world security systems.
 
-Key Sizes: We analyzed the impact of key size on cryptographic security, exploring how the strength of encryption increases with larger key sizes.
+### Block Ciphers
+This section presents a **comparative study of block ciphers**, such as **DES**, **IDEA**, **AES**, and **MARS**. We examined these algorithms in terms of their **entropy** and overall **security** to identify the most reliable options.
 
-RSA Key Lengths: We studied RSA encryption and how key length affects entropy and the overall security of encrypted data.
-SSL/TLS: We examined server configurations and the roles of SSL and TLS in securing data communications over the internet.
+### Key Sizes
+We analyzed how **key size** impacts the strength of cryptographic systems. Larger keys are correlated with stronger encryption, making this topic essential for building secure systems.
 
-Files in this Folder:
+### RSA Key Lengths
+A detailed study of **RSA encryption** was conducted, focusing on how **key length** affects both **entropy** and the security of encrypted data. This analysis is critical when deciding the appropriate key length for secure communications.
 
-Analysis and Comparison of Historical Cryptographic Algorithms.pdf
+### SSL/TLS
+We investigated the configurations of **SSL** and **TLS** protocols, exploring their roles in securing **data communications** over the internet. A proper understanding of SSL/TLS is vital for implementing secure web services and applications.
 
-Analysis of Digital Signature Execution and Time Assessment.pd
+## Conclusion
 
-Entropy Analysis of Block Ciphers A Comparative Study of DES, IDEA, AES, and MARS.pdf
+These documents contain in-depth explanations, research, and comparisons of various encryption techniques and their applications in modern cybersecurity. Whether you’re a beginner or an advanced user, the resources in this folder provide valuable insights into encryption and security measures critical for protecting data.
 
-Environment, Server Configuration, SSL, TLS.pdf
-
-Exploring RSA Key Lengths, Entropy, and Ciphertext Analysis.pdf
-
-Understanding the Impact of Key Size on Cryptographic Security.pdf
-
-These documents contain detailed explanations, research, and comparisons of various encryption techniques and their applications in modern cybersecurity practices.
