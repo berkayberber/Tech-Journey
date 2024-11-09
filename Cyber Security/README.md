@@ -3,7 +3,6 @@
 Welcome to the **Cyber Security** folder. This repository contains essential resources and documents related to various topics covered in our **Cyber Security** course. The focus is on cryptographic techniques, digital signatures, block ciphers, key sizes, and the critical concepts necessary for modern cybersecurity practices.
 
 ## Topics Covered
-
 ### Cryptographic Algorithms
 We have explored several historical cryptographic algorithms and compared their effectiveness. Notable algorithms such as **DES**, **AES**, and **MARS** were discussed in depth to understand their strengths and weaknesses.
 
@@ -23,6 +22,5 @@ A detailed study of **RSA encryption** was conducted, focusing on how **key leng
 We investigated the configurations of **SSL** and **TLS** protocols, exploring their roles in securing **data communications** over the internet. A proper understanding of SSL/TLS is vital for implementing secure web services and applications.
 
 ## Conclusion
-
-These documents contain in-depth explanations, research, and comparisons of various encryption techniques and their applications in modern cybersecurity. Whether you’re a beginner or an advanced user, the resources in this folder provide valuable insights into encryption and security measures critical for protecting data.
+These documents contain in-depth explanations, research, and comparisons of various encryption techniques and their applications in modern cybersecurity. The resources in this folder provide valuable insights into encryption and security measures critical for protecting data.
 
