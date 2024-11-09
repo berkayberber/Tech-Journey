@@ -13,9 +13,14 @@ Features
 - **Machine_Learning**: This project demonstrates the application of machine learning algorithms to classify t-shirt features using a dataset (t-shirts.csv). Key steps include data preprocessing, model selection, and evaluation. The project explores classification algorithms such as Gaussian Naive Bayes, Multinomial Naive Bayes, and Decision Tree classifiers, comparing their performance after normalization and standardization. The results illustrate the effectiveness of different preprocessing techniques and hyperparameters in enhancing model accuracy, offering insights into practical machine learning workflows.
 - **Multilayer_Perception**: This project develops a joke recommendation system using a Multi-Layer Perceptron (MLP) model, leveraging the Jester dataset for user joke ratings. Jokes are encoded with the BERT model to convert text into numerical vectors, forming the basis for user rating predictions.
 Project Highlights
+
 Data Preparation: Extracts user and joke IDs, joke texts, and ratings. The joke texts are encoded into embeddings using the sentence_transformers library.
+
 Dataset Creation: Prepares a CSV with user IDs, joke IDs, ratings, and joke embeddings.
+
 Model Training: Trains an MLP model with default hyperparameters, measuring performance with Mean Squared Error (MSE).
+
 Learning Rate Impact: Tests different learning rates (0.0001, 0.001, 0.01) to evaluate effects on model performance, visualizing cost functions over epochs.
+
 This project provides insights into recommendation systems and the effects of learning rates on training dynamics.
-- **Heuristic_Searching_in_Wroclaw_transportation**: [Description of the heuristic search project]
+
