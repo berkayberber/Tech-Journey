@@ -1,0 +1,1209 @@
+SELECT name, database_id, create_date  
+FROM sys.databases;  
+CREATE DATABASE berkay_database; 
+DROP DATABASE berkay_database;
+USE berkay_database;
+SELECT *FROM SYS.DATABASES;
+
+USE berkay_database;
+CREATE TABLE Personal_infos
+(
+First_name varchar(50),
+Last_Name varchar(50),
+Age INT
+);
+
+-- DROP DATABASE berkay_database;
+CREATE DATABASE berkay_database;
+
+CREATE TABLE pastries(
+Firstname varchar(50),
+quantity INT
+ );
+
+ -- insert values
+ INSERT INTO pastries (Firstname, quantity)
+ VALUES ('berkay', 1);
+ -- INSERT INTO pastries (quantity, Firstname )
+ -- VALUES (1, 'berkay' );
+
+ -- show everything in the table
+
+
+-- add multiple values
+INSERT INTO pastries (Firstname, quantity)
+VALUES ('Burak', 2),
+		('Irfan', 3),
+		('Dilek',4);
+
+CREATE TABLE people(
+first_name VARCHAR(20),
+last_name VARCHAR(20),
+age INT
+);
+
+INSERT INTO people (first_name, last_name, age)
+VALUES ('Tina', 'Belcher', 13);
+		
+INSERT INTO people (first_name, last_name, age)
+VALUES ('Bob', 'Belcher', 42);
+
+INSERT INTO people (first_name, last_name, age)
+VALUES ('Linda', 'Belcher', 45),
+		('Phillip', 'Frond', 38),
+		('Calvin', 'Fischoeder', 38),
+		('Calvin',Null,Null );
+		
+		SELECT * FROM people;
+
+		-- CREATING not null attribute 
+CREATE TABLE people2(
+first_name VARCHAR(20) NOT NULL,
+last_name VARCHAR(20) NOT NULL ,
+age INT NULL
+);
+SELECT * FROM people; 
+
+USE berkay_database;
+CREATE TABLE shops(name varchar(100));
+INSERT INTO shops (name)
+VALUES ('Ber\"kay');
+SELECT* FROM shops;
+
+-- SET DEFAULT VALUES
+CREATE TABLE cats(
+First_name VARCHAR(100) DEFAULT 'unnamed',
+age INT DEFAULT 99
+);
+SELECT* FROM cats;
+
+INSERT INTO cats (First_name, age)
+VALUES('Reis', 18);
+SELECT * FROM cats;
+
+CREATE DATABASE berkay_database;
+CREATE TABLE cats2 (
+Full_name VARCHAR(100) NOT NULL DEFAULT 'Unnamed yet',
+Age INT NOT NULL DEFAULT 0);
+SELECT * FROM cats2;
+-- its because we defined as not null its gives error. nothing inserted
+INSERT INTO cats2 (Full_name, Age) VALUES (NULL,NULL); 
+-- this is how can be inserted and get default given values
+INSERT INTO cats2 () VALUES (); -- its different in another sql workbenchs
+
+	-- Primary key (unique identifier)
+CREATE TABLE unique_cats (
+	cat_id INT PRIMARY KEY,
+	name VARCHAR(100),
+	age INT );
+    DESC unique_cats;
+INSERT INTO unique_cats (cat_id, name, age) VALUES ('1', 'Berkay', 22);
+    SELECT * FROM unique_cats; 
+INSERT INTO unique_cats (cat_id, name, age) VALUES ('1', 'Bkay', 2); -- this gives error cuz duplicates the primary key
+INSERT INTO unique_cats (cat_id, name, age) VALUES ('2', 'Berkay', 22);
+INSERT INTO unique_cats (name, age) VALUES('Berkay', 2); -- error pk required and have to be unique
+
+-- AUTO_INCREMENT  () than we dont have to specify cat id and it will create unique PK for me in order.
+CREATE TABLE unique_cats2 (
+	cat_id INT AUTO_INCREMENT,  
+	name VARCHAR(100), 
+	age INT,
+	PRIMARY KEY (cat_id));
+INSERT INTO unique_cats2 (name, age) VALUES ('berkay Berber', 23);
+    SELECT * FROM unique_cats2;
+    
+-- CHALLENGE Bolum 4
+CREATE TABLE Employees(
+    employee_id INT AUTO_INCREMENT PRIMARY KEY,
+    last_name VARCHAR(100) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    middle_name VARCHAR(100),
+    age INT NOT NULL, 
+    current_status VARCHAR(100) NOT NULL DEFAULT 'employed'
+	);
+    INSERT INTO employees(first_name, last_name, age) VALUES
+('Dora', 'Smith', 58);
+    SELECT * FROM employees;
+    -- CRUD
+    -- how to update and delete info
+    show tables;
+    
+    -- creating new database to work on and insert some values
+    CREATE TABLE cats (
+    cat_id INT AUTO_INCREMENT,
+    name VARCHAR(100),
+    breed VARCHAR(100),
+    age INT,
+    PRIMARY KEY (cat_id)
+); 
+INSERT INTO cats(name, breed, age) 
+VALUES ('Ringo', 'Tabby', 4),
+       ('Cindy', 'Maine Coon', 10),
+       ('Dumbledore', 'Maine Coon', 11),
+       ('Egg', 'Persian', 4),
+       ('Misty', 'Tabby', 13),
+       ('George Michael', 'Ragdoll', 9),
+       ('Jackson', 'Sphynx', 7);
+       -- * means = give me all the colums 
+       SELECT * FROM cats;
+       -- check the names, breed, age
+       SELECT name FROM cats;
+       SELECT breed FROM cats;
+       -- select multiple table in a database
+       SELECT age,breed,name FROM cats;
+       
+       -- WHERE CLAUSE
+       SELECT * FROM cats WHERE age=4;
+       SELECT breed, age FROM cats WHERE age=7;
+       SELECT name FROM cats WHERE age=4;   -- u dont have to select the age although u using it, u an just show the names of people whose age is 4 like that
+       SELECT name, age FROM cats WHERE name='jackson'; -- this shows name and age rows and of people name calles jackson
+       SELECT * FROM cats WHERE name='Egg';
+       SELECT cat_id, name, breed, age FROM cats WHERE age=9;
+       
+       SELECT cat_id FROM cats;
+       SELECT name, breed FROM cats; 
+       -- Ringo	4 Misty	13 just the tabby cats
+       SELECT * FROM cats WHERE breed ='tabby';
+       SELECT name, age FROM cats WHERE breed ='tabby';
+       -- cat_id same as age
+       SELECT cat_id, age FROM cats WHERE cat_id=age;
+    
+    -- Aliases (easier to read results) temporary name to columns 
+    SELECT cat_id AS ID, name AS NaMe, age FROM cats;
+    DESC cats; -- still cat_id
+    
+    SELECT * FROM cats;
+    -- UPDATE (how do we alter existing data?)
+    UPDATE cats SET name= 'Givenname'; -- WHERE tanimlamassak herkesin ismi ayni olur gg
+    UPDATE cats SET name='burada butun isimler ', age='ve age ler deigisir'; -- yani where tanimlamak lazim
+    
+    UPDATE cats SET breed='Tabbychanged' WHERE breed='Tabby';
+    UPDATE cats SET age=15 WHERE name='Misty';  -- for SET age dont put ''
+    UPDATE cats SET cat_id=8 WHERE name='Egg';
+   -- set jackson name to jack, change Ringo's breed to 'British Shorthair', UPdate both Maine Coons ages to be 12 
+   UPDATE cats SET name='Jack' WHERE name='Jackson';
+   UPDATE cats SET breed='British Shorthair' WHERE name='Ringo';
+   UPDATE cats SET age= 12 WHERE breed='Maine Coon';
+   
+   -- DELETE(drop table deletes the table but delete the table deletes rows of table)
+   DELETE FROM cats WHERE breed='Persian';
+   -- delete all 4 year old cats, delete the cats whose age is same as their cat-id, delete all cats
+	DELETE FROM cats WHERE age=4;
+    DELETE FROM cats WHERE age=cat_id;
+    DELETE FROM cats;
+    
+    -- CRUD challange
+    CREATE DATABASE shirts_db;
+    USE shirts_db;
+    
+    CREATE TABLE shirts (
+    shirt_id INT  AUTO_INCREMENT PRIMARY KEY,
+    article VARCHAR(100),
+    color VARCHAR(100),
+    shirt_size VARCHAR(10),
+    last_worn INT
+    );
+    DROP TABLE shirts;
+		
+    INSERT INTO shirts (article, color, shirt_size, last_worn) VALUES 
+    ('t-shirt', 'white', 'S', 10),
+	('t-shirt', 'green', 'S', 200),
+	('polo shirt', 'black', 'M', 10),
+	('tank top', 'blue', 'S', 50),
+	('t-shirt', 'pink', 'S', 0),
+	('polo shirt', 'red', 'M', 5),
+	('tank top', 'white', 'S', 200),
+	('tank top', 'blue', 'M', 15);
+    INSERT INTO shirts (article, color, shirt_size, last_worn) VALUES 
+    ('polo shirt', 'purple', 'M', 50);
+    USE shirts_db;
+    SELECT * FROM shirts;
+    -- select all shirts but only print out article and color
+    SELECT article, color FROM shirts;
+    -- select all medium shirts print out everything but shirt_id
+    SELECT article,color,shirt_size,last_worn FROM shirts WHERE shirt_size='M';
+	-- update all polo shirts change their size to L
+    UPDATE shirts SET shirt_size='L' WHERE article='polo shirt';
+    -- update the shirt last worn 15 days ago  change last_worn to 0
+    UPDATE shirts SET last_worn=0 WHERE last_worn=15;
+    -- update all white shirts change size to 'XS' and color to 'off white'
+    UPDATE shirts SET color='off White', shirt_size='XS' WHERE color='white';
+    -- delete all old shirts last worn 200 days ago 
+    DELETE FROM shirts WHERE last_worn=200;
+    -- delete all tank tops you tastes have changed..
+    DELETE FROM shirts WHERE article='tank top';
+    -- delete all shirts catastrophe!
+    DELETE FROM shirts;
+    -- drop the entire shirts table catastrophe!
+    DROP TABLE shirts;
+    
+    -- ---------------String functions----------- -- new ---
+    CREATE DATABASE book_shop;
+    USE book_shop;
+    CREATE TABLE books 
+	(
+		book_id INT AUTO_INCREMENT,
+		title VARCHAR(100),
+		author_fname VARCHAR(100),
+		author_lname VARCHAR(100),
+		released_year INT,
+		stock_quantity INT,
+		pages INT,
+		PRIMARY KEY(book_id)
+	);
+    
+    INSERT INTO books (title, author_fname, author_lname, released_year, stock_quantity, pages)
+VALUES
+('The Namesake', 'Jhumpa', 'Lahiri', 2003, 32, 291),
+('Norse Mythology', 'Neil', 'Gaiman',2016, 43, 304),
+('American Gods', 'Neil', 'Gaiman', 2001, 12, 465),
+('Interpreter of Maladies', 'Jhumpa', 'Lahiri', 1996, 97, 198),
+('A Hologram for the King: A Novel', 'Dave', 'Eggers', 2012, 154, 352),
+('The Circle', 'Dave', 'Eggers', 2013, 26, 504),
+('The Amazing Adventures of Kavalier & Clay', 'Michael', 'Chabon', 2000, 68, 634),
+('Just Kids', 'Patti', 'Smith', 2010, 55, 304),
+('A Heartbreaking Work of Staggering Genius', 'Dave', 'Eggers', 2001, 104, 437),
+('Coraline', 'Neil', 'Gaiman', 2003, 100, 208),
+('What We Talk About When We Talk About Love: Stories', 'Raymond', 'Carver', 1981, 23, 176),
+("Where I'm Calling From: Selected Stories", 'Raymond', 'Carver', 1989, 12, 526),
+('White Noise', 'Don', 'DeLillo', 1985, 49, 320),
+('Cannery Row', 'John', 'Steinbeck', 1945, 95, 181),
+('Oblivion: Stories', 'David', 'Foster Wallace', 2004, 172, 329),
+('Consider the Lobster', 'David', 'Foster Wallace', 2005, 92, 343);
+
+SELECT * FROM books;
+DESC books;
+	USE book_shop;
+    -- concat function is used to concat strings can be used for combining columns names so on.
+SELECT CONCAT('My','S','QL') as CONCAT_function;
+SELECT CONCAT(author_fname, ' ',author_lname) FROM books;
+SELECT CONCAT('First Name= ', author_fname, '  Last Name= ', author_lname) FROM books;
+-- CONCAT_WS method puts - to between each value.
+SELECT CONCAT_WS(' - ', title, author_fname, author_lname, released_year, stock_quantity, pages) AS alls FROM books;
+    
+    -- SUBSTRING(SUBSTR()) the point is to take a larger piece of text and than get a smaller piece.
+    SELECT SUBSTRING('HELLO WORLD', 1,5) AS substring_method_used;
+    SELECT substring('HELLO WORLD', 7, 3) AS substring_method_used; --  ,7 goes till 7th character than takes the rest than print.	
+    -- take first 20 character from title and ignore the rest
+    SELECT title FROM books;
+    SELECT SUBSTRING(title, 1,20) FROM books; 
+	-- from title take first 10 character than put3 dot to rest
+	SELECT CONCAT(SUBSTRING(title, 1, 10), '...') AS concat_substring FROM books;
+    -- make like L.G. from the author_fname and author_lname
+    SELECT CONCAT(SUBSTR(author_fname,1,1), '.', SUBSTR(author_lname,1,1), '.' )as 1st_character FROM books; 	
+    
+    -- REPLACE (columns or text, 'what', 'with')
+	SELECT REPLACE('Bir seni sevmistim yalan dunyada', 'i', 'a');
+    SELECT REPLACE(title, ' ', '-') FROM books;
+    
+    -- REVERSE reverses the words between 
+    select author_fname FROM books;
+    SELECT REVERSE('Hello World');
+	SELECT REVERSE(author_lname) FROM books;
+    SELECT CONCAT(REVERSE(author_fname), REVERSE(author_lname)) FROM books;
+    
+    -- CHAR_LENGTH tells us number of characters in a given string, LENGTH (given in a byte )
+    SELECT CHAR_LENGTH('Hello WOrld') as word_number;
+    SELECT CONCAT(author_lname, ' is ', CHAR_LENGTH(author_lname), ' characters long') FROM books;
+    
+    -- UPPER & LOWER (makes the given text to upper case or lower case)
+    SELECT UPPER('hello');
+    SELECT LOWER('HELLOworld');
+    SELECT CONCAT(UPPER(author_fname),  '--', LOWER(author_lname)) FROM books;
+    SELECT CONCAT('i LOVE ', UPPER(title)) FROM books WHERE title='THE NAMESAKE'; 
+    SELECT CONCAT('i LOVE ', UPPER(title)) FROM books;
+    USE book_shop;
+    -- INSERT text, from which character, deletes from the first n.
+    SELECT INSERT('hELLO WORLD',6,0, 'THERE');
+    SELECT INSERT('Hello Bobby', 6,4, 'there');
+    SELECT INSERT('Hello Bobby',6,6, ' there');
+    
+    -- LEFT, RIGHT
+    SELECT LEFT('my name is berkay' , 5);
+    SELECT RIGHT('my name is berkay' , 5);
+    
+    -- REPEAT, TRIM
+    SELECT REPEAT('HA', 3);
+    SELECT TRIM('.....san antonio.....');
+    SELECT TRIM(LEADING '.' FROM '......san antonio...');
+	SELECT TRIM(LEADING '.' FROM '......san antonio...');    -- the start  removes the starting dots
+    SELECT TRIM(TRAILING '.' FROM '......san antonio...');  -- the end sondaki  removes the ending dot after the word
+    
+    -- challange time
+    -- reverse and upper case the following sentence 'why does my cat look at me with such hatred?'
+    SELECT REVERSE(UPPER('why does my cat look at me with such hatred?'));
+    -- SECOND ANSER i-like-cats
+    -- select title and replace all spaces with ->
+    SELECT title FROM books;
+    SELECT REPLACE(title, ' ', '->')FROM books;
+    -- select author lname and print normal and reverse version 
+    SELECT author_lname AS forwards, REVERSE(author_lname) AS backwards FROM books;
+    -- print full authorname as a full name in caps 
+    SELECT CONCAT(author_fname, ' ', author_lname) AS 'full name in caps' FROM books;
+    -- take title of each book and combine them into sentence with releasing years
+    SELECT * FROM books;
+    SELECT CONCAT(title, ' was released in ', released_year ) AS blurb FROM books; 
+	-- print the book titles and the length of each title.
+    SELECT title, CHAR_LENGTH(title)  FROM books;
+    -- short title(first 10 character + 3dot), author(every author lastname than comma than first name), stock_quantity number that indicates in the stock and fill with 'in stock' message at the end
+     SELECT * FROM books;
+     SELECT title FROM books;
+     SELECT CONCAT(SUBSTRING(title, 1, 10 ), '...') AS 'short title', CONCAT(author_lname, ',' ,author_fname) AS 'author', CONCAT(stock_quantity, ' in stock') AS Quantity FROM books WHERE book_id=3 || book_id=9 ;
+    
+    --    ------------Refining Selection --------------
+    INSERT INTO books
+    (title, author_fname, author_lname, released_year, stock_quantity, pages)
+    VALUES ('10% Happier', '', 'Harris', 2014, 29, 256),
+           ('fake_book', 'Freida', 'Harris', 2001, 287, 428),
+           ('Lincoln In The Bardo', 'George', 'Saunders', 2017, 1000, 367);
+    -- DISTINCT  (can be used to eliminate duplicate results)  parantezsiz
+    SELECT * FROM books;
+    SELECT DISTINCT author_fname FROM books; -- eliminated duplicate first names
+    SELECT DISTINCT released_year FROM books;
+    -- combination of two column in 2 way
+    SELECT DISTINCT CONCAT(author_fname, ' ', author_lname) as FULL_NAME FROM books;  -- 1st way
+	SELECT DISTINCT author_fname, author_lname FROM books;  -- 2nd way easier and cleanest to use
+     
+	-- ORDER BY (sort our results) 
+    -- prints the null first only order by its column
+    -- should be after the FROM books
+    -- can be called with temporary name
+    -- can be called by queue order
+    -- ASCENDING(alphetically) is default sorting type 
+    -- DESC(decending)
+	SELECT book_id, author_fname, author_lname FROM books ORDER BY author_fname; -- sorted alphetical according to author_fname
+    SELECT book_id, author_fname, author_lname FROM books ORDER BY book_id DESC; 
+	SELECT title, pages FROM books ORDER BY pages ASC; -- ASC was already deafult still used to show 
+    SELECT * FROM books;
+    SELECT * FROM books ORDER BY released_year DESC;
+    SELECT book_id, author_fname, author_lname FROM books ORDER BY 2; -- u can declare the columns queue instead writing
+	SELECT author_lname, released_year, title FROM books ORDER BY author_lname, released_year DESC; -- order by seperately; first author than released_yeaer by descending
+    SELECT CONCAT(author_fname, ' ', author_lname) AS author FROM books ORDER BY author; -- when we declare a name to functions, than we can call as their temporary name with ORDER BY
+
+	-- - LIMIT ---- Limit allows us to limit the number of results we get back
+    SELECT title, author_fname, released_year, book_id FROM books ORDER BY released_year DESC LIMIT 10; -- 5 result printed depending on the book_id orders asc
+	SELECT title, author_fname, released_year, book_id FROM books ORDER BY released_year DESC LIMIT 5,10; -- First from which row than how many rows i wantto
+	SELECT title, author_fname, released_year, book_id FROM books ORDER BY released_year DESC LIMIT 0,5; -- if there is null released_year value than it will count it as 0th
+	SELECT title, author_fname, released_year, book_id FROM books ORDER BY released_year DESC LIMIT 100;  -- although there is like 20row in a table we can still LIMIT the result as we wish. 
+    
+    SELECT author_fname FROM books; 
+	-- ---LIKE ----- help us perform fuzzier searching 
+    -- when u dont exactly remember or want to search related results according to several word (percent sign is obligatory)
+    -- % zero or more character 
+    -- _ mean 1 character (word, character ) can be like '_a_'
+    -- you can search for % or _ with backslash. for exp: WHERE title LIKE '%\%%' '%\_%'
+    SELECT title, author_fname, author_lname FROM books WHERE author_fname='David';
+    SELECT title, author_fname, author_lname FROM books WHERE author_fname LIKE '%da%'; 
+	SELECT title, author_fname, author_lname FROM books WHERE title LIKE '%:%'; -- other characters allowed 
+    SELECT title, author_fname, author_lname FROM books WHERE author_fname LIKE '____'; -- each _ mean 1 character so it searches only for 4 character in a row
+	SELECT title, author_fname, author_lname FROM books WHERE author_fname LIKE '_a_'; -- 1 character than a, 1 more character
+    SELECT * FROM books WHERE author_fname LIKE '%n';
+	SELECT * FROM books WHERE title LIKE '%\%%' ;
+    
+	-- ---- challange time --------
+    SELECT * FROM books; 
+    -- select all story collections (titles that contain 'stories')
+    SELECT title FROM books WHERE title LIKE '%stories%';
+    -- find the longest  page book (print out the title and page count)
+    SELECT title, pages FROM books ORDER BY pages DESC LIMIT 1;
+    -- print a summary containing the title and year, for the 3 most recent books
+    SELECT CONCAT(title, ' - ', released_year) AS summary FROM books ORDER BY released_year DESC LIMIT 3;
+	-- find all books with author_lname that contains a space(" ")
+    SELECT * FROM books;    
+    SELECT title, author_lname FROM books WHERE author_lname LIKE '% %';
+    -- find the 3 books with the lowest stock (select title, year and stock)  year desc, stock asc
+	SELECT title, released_year, stock_quantity FROM books ORDER BY stock_quantity ASC, released_year DESC LIMIT 3;
+    -- print the title and author_lname, sorted first by author_lname and than by title
+    SELECT title, author_lname FROM books ORDER BY author_lname, title; 
+	-- last one upper, column called yell, sorted alphetically by last name, take first and last name my fav author is
+    SELECT CONCAT('MY FAVOURITE AUTHOR IS ', UPPER( author_fname), ' ', UPPER(author_lname), '!') AS yell FROM books ORDER BY author_lname ; -- since just order used than its alphetically
+    
+    -- ---------- AGGREGATE FUNCTIONS (summmarize) ---------------    order by is used after the group by 
+    SELECT author_lname FROM books;
+    USE book_shop;
+    -- COUNT --  counts how many columns exist in the table (COMES BEFORE DINSTINCT IF NEEDED )
+    SELECT COUNT(*) FROM books; -- how many books are there in the table 
+    SELECT COUNT(author_fname) FROM books; -- how many author_fnames
+    SELECT COUNT(DISTINCT author_fname) FROM books; -- how many distinct author_fnames? 
+    SELECT COUNT(DISTINCT released_year) AS total_years FROM books; -- how many years we had where books were released
+    SELECT COUNT(title) FROM books WHERE title LIKE '%the%'; -- how many titles contain the word 'the'
+
+	-- GROUP BY -- aggregates identical data into single rows, for instance if there are two lname exist, groups it.
+	SELECT author_lname FROM books; 
+	SELECT author_lname FROM books GROUP BY author_lname; -- behind the science it grouped the exist same lnames but we dont using it
+    SELECT author_lname, COUNT(*) FROM books GROUP BY author_lname; -- here is how we see the groups
+    SELECT author_lname, COUNT(*) AS book_written FROM books GROUP BY author_lname ORDER BY book_written DESC ;
+	SELECT COUNT(*) FROM books GROUP BY author_lname; 
+	SELECT COUNT(author_lname) as XD , title FROM books GROUP BY author_lname; -- here after grouping the author_lnames, takes the first title of the lname and represent.
+
+	-- MIN AND MAX -- helps us to find min/max value in a column 
+    SELECT MIN(released_year) FROM books; -- find min released_year
+    SELECT MAX(pages) FROM books;
+    SELECT MIN(author_lname), MAX(author_lname) FROM books;  												
+    SELECT title, pages FROM books ORDER BY pages DESC LIMIT 1; -- title of the longest book
+    
+    -- SUBQUERIES 
+	SELECT * FROM books WHERE pages= (SELECT MAX(pages) FROM books);-- 2nd way title of the longest book  (once esittirden sonrasi calisir parantes ici sonra da komple)
+	INSERT INTO books (title, pages) VALUES ('My life in words', 634); -- at the 2nd way we can see the duplicated values as well 
+    -- title of the book that was released earliest
+    SELECT MIN(released_year) FROM books ORDER BY released_year LIMIT 1;
+    SELECT title, released_year FROM books WHERE released_year = (SELECT MIN(released_year) FROM books);
+    
+    -- GROUPING BY MULTIPLE COLUMNS --  
+    SELECT author_lname, COUNT(*) FROM books GROUP BY author_lname; -- in normal we do like this there is below example with multiple column
+    SELECT author_lname, COUNT(*) FROM books GROUP BY author_lname, author_fname;  
+    SELECT author_fname, author_lname FROM books;
+	SELECT CONCAT(author_fname,' ', author_lname) AS author, COUNT(*) FROM books GROUP BY author;
+ 
+	-- MIN, MAX with GROUP BY 
+	SELECT author_fname, author_lname, MIN(released_year) FROM books GROUP BY author_fname, author_lname; 	 -- group all of the books by the same authors together and than find the minimum year
+	SELECT author_lname, COUNT(*), MAX(released_year), MIN(released_year) FROM books GROUP BY author_lname;
+
+	-- -- SUM ---
+    SELECT SUM(released_year) FROM books;
+	-- Sum all pages each author has written 
+    SELECT author_lname, SUM(pages) FROM books GROUP BY author_lname;	
+	SELECT author_lname, COUNT(*), SUM(released_year) FROM books GROUP BY author_lname;
+     
+     -- ---AVG----
+     SELECT AVG(pages) FROM books; -- calculate the average released_year across all books
+ 
+ -- -- CHALLANGE TIME -----   
+ -- Print the number of books in the database
+ SELECT COUNT(*)  FROM books;
+ -- Print out how many books were released in each year SELECT * FROM books;
+ SELECT released_year, COUNT(*) AS were_released FROM books GROUP BY released_year ORDER BY released_year ASC;
+ -- print out the total number of books in stock 
+ SELECT SUM(stock_quantity) FROM books;
+ -- find the average released_year for each author
+ SELECT CONCAT(author_fname, ' ', author_lname) AS author, AVG(released_year) FROM books GROUP BY author_fname, author_lname; 
+ -- find the full name of the author who wrote the longest book 
+ SELECT CONCAT(author_fname, ' ' ,author_lname) AS author, pages FROM books WHERE pages = (SELECT MAX(pages) FROM books);
+ -- Makes this happen -> year desc, #books (quantity (group by)), avg pages (avg)
+ SELECT released_year AS year, COUNT(released_year) AS '# books', AVG(pages) AS 'avg pages' FROM books GROUP BY released_year ORDER BY  released_year ASC;
+ 
+ 
+ -- ----------------------  datatypes ------------
+-- DATE ---- Values with a date but no Time  'YYYY-MM-DD' format  (for instance, birth year on web apps, holiday days etc.)
+--  TIME --- Values with a time but no date. kullanilan zaman icin 'HH:MM:SS' format 
+-- DATETIME ---- Values with a date and time 'YYYY-MM-DD HH:MM:SS' format 
+-- curtime--- SELECT curtime();
+-- curdate---SELECT curdate();
+-- NOW--- SELECT NOW();
+USE berkay_database;
+DROP TABLE people;
+CREATE TABLE people (
+name VARCHAR(100),
+birthdate DATE,
+birthtime TIME,
+birthdt DATETIME
+);
+DESC people;
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Elton', '2000-12-25', '11:00:00', '2000-12-25 11:00:00');
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Lulu', '1985-04-11', '9:45:10', '1985-04-11 9:45:10');
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Juan', '2020-08-15', '23:59:00', '2020-08-15 23:59:00');
+SELECT * FROM people;
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Hazel', CURDATE(), CURTIME(), NOW());
+SELECT curtime();
+SELECT curdate();
+SELECT NOW();
+
+--  DATE FUNCTIONS --- DAY(), DAYOFWEEK(), MONTHNAME(), YEAR(), HOUR(), MINUTE(), MONTH(), 
+SELECT 
+    birthdate,
+    DAY(birthdate),
+    DAYOFWEEK(birthdate),
+    DAYOFYEAR(birthdate)
+FROM people;
+SELECT 
+    birthdate,
+    MONTHNAME(birthdate),
+    YEAR(birthdate)
+FROM people;
+SELECT 
+    birthtime,
+    HOUR(birthtime),
+    MINUTE(birthtime)
+FROM people;
+SELECT 
+    birthdt,
+    MONTH(birthdt),
+    DAY(birthdt),
+    HOUR(birthdt),
+    MINUTE(birthdt)
+FROM people;
+
+-- ----  format string -------   -- DATE_FORMAT() (all times), TIME_FORMAT()(used for four,minute,second), 
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Elton', '2000-12-25', '11:00:00', '2000-12-25 11:00:00');
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Lulu', '1985-04-11', '9:45:10', '1985-04-11 9:45:10');
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Juan', '2020-08-15', '23:59:00', '2020-08-15 23:59:00');
+
+SELECT birthdate, DATE_FORMAT(birthdate, '%a %b %D') FROM people;
+SELECT birthdt, DATE_FORMAT(birthdt, '%H:%i') FROM people;
+SELECT birthdt, DATE_FORMAT(birthdt, 'BORN ON: %r') FROM people;
+
+-------- DATE MATH ------------
+-- DATEDIFF  -- substracting two date, only date parts 
+-- DATE_ADD ---  DATE_ADD(date, INTERVAL expr unit(year,month))
+-- DATE_SUB ---    DATE_SUB(date, INTERVAL expr unit)
+-- TIMEDIFF --  DATEDIFF()
+
+SELECT CURDATE(), birthdate,  DATEDIFF(CURDATE(), birthdate) FROM people;
+SELECT CURTIME();
+select NOW();
+SELECT DATE_ADD(CURDATE(), INTERVAL 1 YEAR);
+SELECT DATE_ADD(CURDATE(), INTERVAL 12 YEAR);
+SELECT DATE_ADD(CURDATE(), INTERVAL 1 MONTH);	
+SELECT DATE_ADD(CURDATE(), INTERVAL 1 DAY);
+SELECT DATE_SUB(CURDATE(), INTERVAL 1 MINUTE_SECOND);
+SELECT DATE_SUB(CURDATE(), INTERVAL 1 DAY_SECOND);
+SELECT DATE_SUB(CURDATE(), INTERVAL 1 DAY_HOUR);
+
+SELECT birthdate FROM people; -- find when gonna be 18 from their birthdate
+SELECT birthdate, DATE_ADD(birthdate, INTERVAL 18 YEAR) AS 'Legal Age', CONCAT(DAY(birthdate), 'th of ', DAYNAME(birthdate))  FROM people;
+SELECT TIMEDIFF(CURTIME(), '15:00:00' );  -- uyandiktan sonra gecen sure     
+SELECT NOW() + INTERVAL 18 YEAR;
+SELECT name, birthdate FROM people;
+SELECT name, birthdate, YEAR(birthdate + INTERVAL 18 YEAR) 'will be independent' FROM people;
+
+-- ---- TIMESTAMP ------- combine a date and a time. TIMESTAMP takes up less storage than DATETIME. its a smaller thing memory. 
+-- (DATETIME type is used for values that contain both date and time parts.)
+-- TIMESTAMPADD() Add an interval to a datetime expression
+-- TIMESTAMPDIFF() Substract an interval from a datetime expression.
+SELECT NOW();
+SELECT TIMESTAMP('2023-01-15 21:14:20');
+USE berkay_database;
+ CREATE TABLE captions(
+ text VARCHAR(150),
+ created_at TIMESTAMP default CURRENT_TIMESTAMP   -- when we created the att with default currenttimestamp than it will automically put the current time when the text inserted.
+ );
+ INSERT INTO captions(text) VALUES('Just me and the girls chillin');
+ INSERT INTO captions(text) VALUES('beautiful sunset');
+ select * from captions2;
+ 
+ CREATE TABLE captions2(
+ text VARCHAR(150),
+ created_at TIMESTAMP default CURRENT_TIMESTAMP, -- TIMESTAMP yerine DATETIME da kullanilabilir. ama timestamp daha az yer tutar. datetime daha uzun yillara kadar gider.
+ updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP   -- 	shows updated timestamp when the update done.
+ );
+  INSERT INTO captions2(text) VALUES('I LOVE LIFE');
+  UPDATE captions2 SET text='That was a lie' WHERE text = 'I LOVE LIFE' ; 
+  
+  -- ------CHALLENGE TIME ----------------- 
+  -- define the appropriate type, price < 1.000.000
+  CREATE TABLE  inventory(
+  item_name VARCHAR(100),
+  price DECIMAL(8,2),   -- 8 DIGIT AND FOR DECIMAL
+  quantity INT
+  );
+  -- difference between TIMESTAMP and DATETIME.
+		-- They both store datetime information, but there's a difference in the range, 
+		-- TIMESTAMP has a smaller range. TIMESTAMP also takes up less space. 
+		-- TIMESTAMP is used for things like meta-data about when something is created
+		-- or updated.
+  -- print out current time
+  SELECT CURTIME();
+  -- print out current date (but not time)
+  SELECT CURDATE();
+  -- print out the current day of week AS NUMBER
+  SELECT DAYOFWEEK(CURDATE());
+  -- print out the current day and time using this format: mm/dd/yyyy
+SELECT DATE_FORMAT(CURDATE(), '%m/%d/%Y') AS Currentdate;
+-- print out the current day and time using this format: january 2nd at 3:15, april 1st at 10:18
+SELECT DATE_FORMAT(CURRENT_TIMESTAMP(), '%M %D at %k:%i') ;
+-- Create a tweets table that stores: the tweet content(UP TO 180 CHARACTER), a username, time it was created 
+CREATE TABLE tweets(
+tweet_content VARCHAR(180),
+username  VARCHAR(20),
+created_time TIMESTAMP default NOW()
+);
+INSERT INTO tweets (tweet_content, username) VALUES('this is my first tweet', 'coltscat');
+INSERT INTO tweets (tweet_content, username) VALUES('this is my second tweet', 'coltscat');
+SELECT * FROM tweets;
+
+                      -- ----------------Comparison & Logical Operators------------------------ COMPARISON FUNCTION AND OPERATORS 
+-- we will be able do like: select all books not published in 2017. select all birthday between 1990 and 1992, select all item that are in stock and price below $19.99.
+-- NOT EQUAL ---
+USE book_shop;
+SELECT * FROM books WHERE released_year != 2017; -- select all books not published in 2017
+SELECT title, author_lname FROM books; -- select all the books that were not written by Gaiman
+SELECT title, author_lname FROM books WHERE author_lname != 'Gaiman';
+-- NOT LIKE ----
+SELECT * FROM books WHERE title NOT LIKE '%e%';
+SELECT title FROM books WHERE title LIKE '%stories%';
+SELECT title FROM books WHERE title NOT LIKE '%stories%';
+-- GEATER THAN ------
+SELECT * FROM books WHERE released_year > 2005;
+SELECT * FROM books WHERE pages > 500;
+SELECT * FROM books
+WHERE pages < 200;
+-- less than or equal to
+SELECT * FROM books WHERE released_year < 2000;
+SELECT * FROM books WHERE released_year <= 1985;
+
+-- LOGICAL AND ----- AND -- both  left and right side gotta be true both of them
+-- print released_year >2003 and stock_quantity <= 100
+SELECT * FROM books WHERE released_year > 2003 AND stock_quantity <=100;
+SELECT * FROM books WHERE CHAR_LENGTH(title) > 30 AND pages >= 200;
+SELECT title, author_lname, released_year FROM books WHERE released_year > 2010 AND author_lname = 'Eggers';
+SELECT title, author_lname, released_year FROM books WHERE released_year > 2010 AND author_lname = 'Eggers' AND title LIKE '%novel%';
+
+-- LOGICAL OR -------   OR   if one of them true its enough to print
+SELECT 1>5 OR 2>1;
+SELECT title, pages FROM books  WHERE CHAR_LENGTH(title) > 30 AND pages > 500;
+SELECT title, author_lname FROM books WHERE author_lname='Eggers' AND released_year > 2010;
+SELECT title, author_lname, released_year FROM books WHERE author_lname='Eggers' OR released_year > 2010;
+SELECT title, pages FROM books WHERE pages < 200  OR title LIKE '%stories%';
+
+-- BETWEEN, NOT BETWEEN----   WHERE AND operator used for BETWEEN,  not between what ever range that we want to exclude.
+-- select all books published between 2004 and 2015 -- this can be done with logical and and also between operator.
+SELECT * FROM books WHERE released_year >= 2004 AND released_year <= 2015; -- solution with logical and 
+SELECT title, released_year FROM books WHERE released_year BETWEEN 2004 AND 2014;
+ SELECT title, released_year, pages FROM books WHERE pages NOT BETWEEN 200 AND 300;
+
+-- COMPARING DATES ----- 
+USE berkay_database;
+SELECT * FROM people;
+-- 1999 dan once dogmus kisielrin isimlerini bastir
+SELECT name, birthdate FROM people WHERE birthdate < '2004-01-01';  -- '' means string but mysql can compare the strings looks like date.
+-- solution without sting only for year
+SELECT * FROM people WHERE YEAR(birthdate) < 2005;  -- u can declare the operator which you want to execute (year(), month() ...)
+-- print people whose birth time is later than 10:00:00
+SELECT * FROM people WHERE birthtime > '10:00:00'; -- we re again comparing true time with string 
+SELECT * FROM people WHERE HOUR(birthtime) > 12;
+-- CAST function for comparing dates -- cast helps us convert one data type to another. so we can convert string into actual date. 
+SELECT CAST('09:45:50' AS TIME);
+-- people who born in the afternoon
+SELECT * FROM people WHERE birthtime BETWEEN '11:00:00' AND '16:00:00';  -- Technically correct way to do this represented below with cast operator.
+SELECT * FROM people WHERE birthtime BETWEEN CAST('11:00:00' AS TIME) AND CAST('16:00:00' AS TIME); 
+SELECT * FROM people WHERE HOUR(birthtime) BETWEEN 12 AND 23;
+SELECT * FROM books;
+
+    -- IN, NOT IN OPERATOR -------- USE book_shop;
+-- select all books written by Carver or lahiri
+SELECT * FROM books WHERE author_lname = 'Carver' OR author_lname = 'Lahiri' OR author_lname = 'Smith'; -- in operator makes this in easy way because when we have lots of author to check
+SELECT * FROM books WHERE author_lname IN('Carver', 'Lahiri', 'Smith'); -- second way with  IN operator and easiest
+SELECT * FROM books WHERE author_lname NOT IN('Carver', 'Lahiri', 'Smith'); -- NOT IN
+SELECT title, released_year FROM books WHERE released_year >= '2000' AND released_year NOT IN (2000,2002,2004,2006,2008,2010,2012,2014) ; -- we dont want even numbers so this way is even longer one .
+SELECT title, released_year FROM books WHERE released_year >= '2000' AND released_year % 2 != 0 ORDER BY released_year ASC; -- easier way for taking odd numbers greater than 2000
+
+-- CASE STATEMENTS ------- we can use case statement to make decisions about values to have different outcomes based off of values.
+SELECT title, released_year,
+	CASE 
+		WHEN released_year >= 2000 THEN 'MODERN LIT'
+        ELSE '20th century lit'
+        END AS GENRE FROM books; -- end as den sonra yei acar ve yazilari oraya oyar 
+        
+ -- 2nd exp if stock quantity 0-50 than '*', 51-100 -> '**' ...
+ SELECT title, stock_quantity,
+	CASE
+		WHEN stock_quantity BETWEEN 0 AND 50 THEN '*'
+        WHEN stock_quantity BETWEEN 51 AND 100 THEN '**'
+        WHEN stock_quantity BETWEEN 100 AND 200 THEN '***'
+        ELSE 'MINUS OR MORE THAN 200'
+	END AS STOCK
+ FROM books;
+ -- or
+ SELECT title, stock_quantity,
+    CASE
+        WHEN stock_quantity <= 40 THEN '*'
+        WHEN stock_quantity <= 70 THEN '**'
+        WHEN stock_quantity <= 100 THEN '***'
+        WHEN stock_quantity <= 140 THEN '****'
+        ELSE '*****'
+    END AS stock
+FROM books;
+
+-- IS NULL -------  also not null can be used.
+SELECT * FROM books WHERE author_lname IS NULL;
+SELECT * FROM books WHERE author_lname IS NOT NULL;
+SELECT * FROM books; 
+SELECT * FROM books WHERE title IS NULL;
+
+-- ----------CHALLANGE TIME ----------
+SELECT 10 != 10; -- guess: 0
+SELECT 15 > 14 AND 99 - 5 <= 94; -- guess: 1
+SELECT 1 IN (5,3) OR 9 BETWEEN 8 AND 10;-- guess: 1
+-- select all books written before 1980 (non-inclusive)
+SELECT * FROM books; 
+SELECT * FROM books WHERE released_year < 1980;
+-- select all books written by eggers or chabon
+SELECT * FROM books WHERE author_lname = 'Eggers' OR author_lname = 'Chabon';
+-- select all books written by Lahiri, published after 2000
+SELECT * FROM books WHERE author_lname = 'Lahiri' AND released_year >2000;
+-- select all books with page count between 100 and 200
+SELECT * FROM books WHERE pages BETWEEN 100 AND 200;
+-- select all books where author_lname starts with a 'C' or an 'S'
+SELECT * FROM books WHERE author_lname LIKE 'C%' OR author_lname LIKE 'S%';
+SELECT title, author_lname FROM books WHERE SUBSTR(author_lname, 1,1) IN ('C', 'S'); -- 2nd way 
+-- if title contains 'stories' -> Short stories, if Just kids and A Heartbreaking Work -> Memoir, Everything else -> Novel
+SELECT title, author_lname,
+CASE
+WHEN title LIKE '%stories%' THEN 'SHORT STORIES'
+WHEN title = 'Just kids' THEN 'Memoir'
+WHEN title like '%A Heartbreaking Work%' THEN 'Memoir'
+ELSE 'Novel'
+END AS TYPE
+FROM books;
+-- make this happen: print author fname and lname than count of author books
+SELECT author_fname, author_lname,
+	CASE
+        WHEN COUNT(*) = 1 THEN '1 book'
+        ELSE CONCAT(COUNT(*), ' books')
+	END AS count
+FROM books
+WHERE author_lname IS NOT NULL
+GROUP BY author_fname, author_lname;
+
+--                                   --------------------------------- CONSTRAINTS & ALTER TABLE -----------------------------------------------
+
+-- -------- UNIQUE Constraint ---------- cant be duplicaetd the asmue value of an phone for instance
+CREATE TABLE contacts (
+	name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL UNIQUE);
+INSERT INTO contacts (name, phone)
+VALUES ('billybob', '8781213455');
+-- This insert would result in an error:
+INSERT INTO contacts (name, phone)
+VALUES ('billybob', '8781213455');
+--   -------CHECK Constraints --------- return true or false, we can use CHECK  can be used to boolean true or false, one or zero, 
+CREATE TABLE parties (
+name VARCHAR(100),
+age INT CHECK (age >= 18) -- 18den kucukleri kabul etmez insertlenemez
+);
+CREATE TABLE users (
+username VARCHAR(100) NOT NULL,
+age INT CHECK(age >0)
+);
+INSERT INTO users (username, age) VALUES ('bluethecat', 50); -- no problem with that to insert when age > 0
+INSERT INTO users (username, age) VALUES ('naemsdf', -3); -- this gives error cuz should be bigger than 0
+
+CREATE TABLE palindromes(
+word VARCHAR(100) CHECK(REVERSE(word) = word) -- ricecar same as its reverse 
+);
+INSERT INTO palindromes(word) VALUES ('racecar'); -- this work appropriate cuz its same as its reverse
+INSERT INTO palindromes(word) VALUES ('ricecar');-- this wont work, reverse not same 
+INSERT INTO palindromes(word) VALUES ('mom');
+
+--  --------NAMED constraints -----------when we insert value into table that contains CHECK constraint, and doesnt match with the check than it gives 
+-- default error message as 'palindromes_chk_1' we can change that with adding CONSTRAINT 
+CREATE TABLE palindromes2 ( -- expample 
+  word VARCHAR(100),
+  CONSTRAINT word_is_palindrome CHECK(REVERSE(word) = word)
+);
+CREATE TABLE users2 (
+username VARCHAR(255) NOT NULL,
+age INT,
+CONSTRAINT not_legal CHECK (age >= 18)
+);
+INSERT INTO users2(username, age) VALUES ('named constraint', 17); -- gives error message as not_legal, because its under 18.
+
+-- --------Multi-Column checks ----------- we can set up our own constraints that use multiple columns.
+-- so this example below has a CONSTRAINT that makes sure name and address combiantion are unique
+-- CREATE TABLE companies (
+--    supplier_id INT AUTO_INCREMENT,
+--    name VARCHAR(255) NOT NULL,
+--    phone VARCHAR(255) NOT NULL UNIQUE,
+--    address VARCHAR(255) NOT NULL,
+--    PRIMARY KEY (supplier_id),
+--    CONSTRAINT name_address UNIQUE (name , address)
+-- );
+CREATE TABLE companies (
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    CONSTRAINT name_address UNIQUE (name , address) -- combination should be unique
+);
+INSERT INTO companies(name, address) VALUES ('berkay', 'berber');-- this is unique so that can be inserted 
+INSERT INTO companies(name, address) VALUES ('berkay', 'karola miarki 16/17'); -- after above inserted this will still workd although berkay is same 
+INSERT INTO companies(name, address) VALUES ('berkay', 'karola miarki 16/17'); -- but here both cant be same, error 
+ select * from companies;
+ 
+CREATE TABLE houses (
+  purchase_price INT NOT NULL,
+  sale_price INT NOT NULL,
+  CONSTRAINT sprice_gt_pprice CHECK(sale_price >= purchase_price)
+); 
+INSERT INTO houses(purchase_price, sale_price) VALUES (150, 200); -- this can be inserted cuz purchase price is smaller 
+INSERT INTO houses(purchase_price, sale_price) VALUES (150, 100); -- this can not be inserted cuz purchase price is bigger
+select * from houses;
+
+-- --------- ALTER TABLE  adding columns---------------- use alter table to add a new column to an existing table.  we dont using pharanthesis for alter table
+-- ALTER TABLE companies 
+-- ADD COLUMN city VARCHAR(25);
+
+ALTER TABLE companies 
+ADD COLUMN phone VARCHAR(15);
+ select * from companies;
+ 
+ALTER TABLE companies
+ADD COLUMN employee_count INT NOT NULL DEFAULT 1; -- there is no company has employee less than 1 so makes sense.
+
+-- --------- ALTER TABLE:  dropping columns---------------- 
+-- lets drop phone cloumn we created above.
+ALTER TABLE companies DROP COLUMN phone; -- phone was null before drop
+ALTER TABLE companies DROP COLUMN employee_count; -- values drop as well
+
+-- --------- ALTER TABLE: RENAME TABLE ---------------- there is 2 way of doing this. 
+-- RENAME TABLE   show tables;
+RENAME TABLE companies TO my_company; -- 1st way
+ALTER TABLE my_company RENAME TO new_company; -- 2ND WAY of changing table name
+-- RENAME COLUMN 
+ALTER TABLE new_company RENAME COLUMN name TO Username; -- column renamed  
+select * from new_company;
+
+-- --------- ALTER TABLE: modifying column ----------------  Use modify to change an existing column's type, 
+-- this example modify's the biz_name column to be a VARCHAR(100) -> ALTER TABLE suppliers MODIFY biz_name VARCHAR(100); -- Onceki data type degistirildi. biz_name should be sama to old so we can modify this 
+select * from companies;
+ALTER TABLE new_company RENAME TO companies; -- alter table renamed table 
+ALTER TABLE companies RENAME COLUMN Username TO company_name; -- column name called username changed
+-- Modifying column is done below than value going to be inserted to check.
+ALTER TABLE companies MODIFY company_name VARCHAR(100) DEFAULT 'UNKNOWN';
+INSERT INTO companies(company_name, address) VALUES( 'pasaz', 'grunwaldzki'); -- this will normally insert. no problem.
+INSERT INTO companies(address) VALUES( 'violets are blue');  -- company_name will be unknown cuz we set it default as unknown and we didnt insert value. we modify the column 
+DESC companies;
+
+-- ---changing columns ---------  use change to rename a column AND change its data type .
+-- example below. after change first type current column name and than new column name and change the data type.
+ALTER TABLE companies CHANGE company_name company_renamed VARCHAR(200); -- basic syntax is this. changes both col name and type.
+
+-- ALTER TABLE: constraints  -- dev.mysql.com ALTER TABLE Statement
+ALTER TABLE houses  ADD CONSTRAINT positive_pprice CHECK (purchase_price >= '0');
+CREATE TABLE example (
+  alim INT NOT NULL,
+  satim INT NOT NULL,
+  harcanan INT NOT NULL CONSTRAINT harcanan_mostbe_higher CHECK (harcanan > 20)
+); 
+ALTER TABLE example ADD CONSTRAINT most_positive CHECK(alim >= 0);
+INSERT INTO example(alim, satim) VALUES( -1, 4); -- we can not insert negative value after modify table attribute to add constraint to check if given is negative
+ALTER TABLE example DROP CONSTRAINT most_positive;
+select * from example;
+DROP TABLE example;
+INSERT INTO example(alim, satim, harcanan) VALUES( -1, 4, 5); -- this wont work cuz <0 and 20>5
+INSERT INTO example(alim, satim, harcanan) VALUES( -1, 4, 25); -- this wont work
+INSERT INTO example(alim, satim, harcanan) VALUES( 0, 4, 25); -- this works.
+ 
+			    --  --------------------------One To Many & Joins ------------------------------  
+-- real world data is messy and interrelated(birbiriyle iliskili) between tables.
+-- for the book shop database there can be such table interrelated to book shop database. -> orders, authors, versions, customers, reviews, genres
+
+--  ------relationship basics --------  how we represent complex data using mysql
+-- ONE TO ONE relationship -- one book can have one table where all the user infos hided and this table only belongs to 1 specific book.
+-- ONE TO MANY relationship -- one book can have a lot of review, all the reviews belongs to this 1 book.
+-- MANY TO MANY -- 
+-- customers & orders -> customer may order multiple staff, all orders must be associated to only one user. , no way 2 people associated with 1 order.
+
+-- for instance we want to store: - a customer first and last name, - a customer e-mail, - the date of the purchase, - price of the order
+-- when we create 1 table with all those infos of customer, its not effective at all, just a bad idea. because it will all the users data even who didnt make 
+-- purchase or sth. and duplicated customer names for orders done at the past
+-- table example for one to many(foreign key) - >  Customers: customer_id, first_name, last_name, email,  Orders: order_id, order_date, amount, customer_id( our foreign key that references)
+
+CREATE TABLE customers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(50)
+);
+-- orders table that has foreign key have to be same customer_id with from customers table. otherwise u cant insert value.
+CREATE TABLE orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_date DATE,
+    amount DECIMAL(8,2),
+    customer_id INT, -- we define new attr to used at the below to show that its foreign and where its get refernce
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+INSERT INTO customers (first_name, last_name, email) 
+VALUES ('Boy', 'George', 'george@gmail.com'),
+       ('George', 'Michael', 'gm@gmail.com'),
+       ('David', 'Bowie', 'david@gmail.com'),
+       ('Blue', 'Steele', 'blue@gmail.com'),
+       ('Bette', 'Davis', 'bette@aol.com');
+INSERT INTO orders (order_date, amount, customer_id)
+VALUES ('2016-02-10', 99.99, 1),
+       ('2017-11-11', 35.50, 1),
+       ('2014-12-12', 800.67, 2),
+       ('2015-01-03', 12.50, 2),
+       ('1999-04-11', 450.25, 5);
+       select * from orders;
+INSERT INTO orders(order_date, amount, customer_id) VALUES ('2022-11-11', 78.99, 54);-- cant be inserted because there is no customer_id as 54 at the customers table. 
+INSERT INTO orders(order_date, amount, customer_id) VALUES ('2022-11-11', 78.99, 4); -- but this can be inserted 
+
+-- write query that select all the orders placed by boy george. -> basically we gonna try and find the id of boy george from the table customers and then we'll take that id and find the orders that have that as their customer id 
+SELECT id FROM customers WHERE last_name = 'George';
+SELECT * FROM orders WHERE customer_id = 1;
+
+SELECT * FROM orders WHERE customer_id = (SELECT id FROM customers WHERE last_name = 'George'); -- this second way of doing the same above. 
+-- the solutions aboves are not representing the infromation of other table so that we have statements to join them together. 
+
+		-- ------------------ CROSS JOINS ----------------------- its join type that very much less useful than the other ones.
+-- cross join simply gonna take every single row from customers and combine it with every single row from orders. we'll get every possible combination. no logic at all.  its dumb join 
+select * from customers, orders ; -- combination of every single customer with every single order.  -- all customers orders all.
+
+			-- -----------INNER JOIN--------------- select all records from A and B where the join condition is met.  
+SELECT * FROM customers
+JOIN orders ON orders.customer_id = customers.id; -- we dont have to write INNER JOIN, INNER default set as inner join 
+
+SELECT * FROM orders
+JOIN customers ON customers.id = orders.customer_id;
+  
+SELECT first_name, last_name, order_date, amount FROM customers 
+JOIN orders ON orders.customer_id = customers.id;
+
+		-- --------- INNER JOIN with GROUP BY -------------
+-- Total amount each customer spend
+SELECT first_name, last_name, SUM(amount) AS customer_spend, COUNT(*) AS sum_of_order FROM customers -- count shows how many order made by each customer.
+JOIN orders ON orders.customer_id = customers.id GROUP BY first_name, last_name ORDER BY customer_spend DESC;
+
+         -- ----------LEFT JOIN --------------- select everything from A , along with any matching records in B
+SELECT first_name, last_name, order_date, amount FROM customers 
+LEFT JOIN orders ON orders.customer_id = customers.id; -- this shows that signed customers info with the null, for table b content even if there is no value attached.alter
+
+SELECT order_date, first_name, last_name, amount FROM orders -- column name sirasi fark etmez sadece ordersin yerini defistik diye ona gore yazdim  -- orders part LEFT JOIN oncesi sol taraf customers sag
+LEFT JOIN customers ON orders.customer_id = customers.id; -- this works as INNER JOIN, same result. 
+-- we wont have any order that doesnt have customer_id, orders is left side that our matching point(customer_id) so when it doesnt matched same result as INNER JOIN.
+
+--  ----- LEFT JOIN with GROUP BY -------------IFNULL(SUM(amount), 0)-- if null than replace it with 0
+-- CUSTOMERS, ORDERS hangi musterilerin order vermedigini gosterecek 
+SELECT first_name, last_name, IFNULL(SUM(amount), 0) FROM customers 
+LEFT JOIN orders ON orders.customer_id = customers.id GROUP BY first_name, last_name ;
+
+-- --------------RIGHT JOIN --------------- select everything from B, along with any matching records in B
+SELECT first_name, last_name, order_date, amount FROM orders 
+RIGHT JOIN customers ON orders.customer_id = customers.id;
+
+SELECT  first_name, last_name, order_date, amount
+FROM customers RIGHT JOIN orders ON customers.id = orders.customer_id;
+
+-- --------- on delete cascade ---------- we can have customer without having its order. when we delete custome who has order, 
+DELETE FROM customers WHERE last_name = 'George'; -- if we try to delete customer that has a order like here, its error because there is registered customer_id at orders table so not allowed
+-- deleteing depends on the situation cuz u might not want for isntance delete comments in website after profile deleted on the other pages comment place but see the user as a deleted account.
+drop table orders;
+drop table customers;
+ 
+CREATE TABLE customers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(50)
+);
+CREATE TABLE orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_date DATE,
+    amount DECIMAL(8 , 2 ),
+    customer_id INT,
+FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE CASCADE -- here says when you delete a specific customer than delete also registered values of related customer_id from orders table
+); -- same data inserted from before.
+select * from orders;
+select * from customers;
+DELETE FROM customers WHERE last_name = 'George';-- Boy george deleted 
+select * from orders; -- now we have custoemr_id = 1 deleted 
+DELETE FROM customers WHERE last_name = 'Michael'; -- select * from orders; -- now we have custoemr_id = 2 deleted 
+
+              -- -------------------CHALLANGE TIME ------------------------ 
+-- Write this schema:  Students(id, first_name),  Papers (title, grade, student_id)
+
+CREATE TABLE students(
+id INT PRIMARY KEY AUTO_INCREMENT,
+first_name VARCHAR(30)
+);
+CREATE TABLE papers(
+id INT PRIMARY KEY AUTO_INCREMENT,
+title VARCHAR(100),
+grade INT,
+student_id INT,
+FOREIGN KEY (student_id) REFERENCES students(id));
+
+INSERT INTO students (first_name) VALUES 
+('Caleb'), ('Samantha'), ('Raj'), ('Carlos'), ('Lisa');
+ 
+INSERT INTO papers (student_id, title, grade ) VALUES
+(1, 'My First Book Report', 60),
+(1, 'My Second Book Report', 75),
+(2, 'Russian Lit Through The Ages', 94),
+(2, 'De Montaigne and The Art of The Essay', 98),
+(4, 'Borges and Magical Realism', 89);
+select * from students;
+select * from papers;
+-- first name of every student who wrote a corresponding essay with the title and grade next to it, order according to grade rate.
+SELECT first_name, title, grade FROM students 
+INNER JOIN papers ON students.id = papers.student_id ORDER BY grade DESC;
+-- title and grade there is null. i think all users alter
+SELECT first_name, title, grade FROM students
+LEFT JOIN papers ON students.id = papers.student_id;
+-- if there is no title, fill it with MISSING, no grade= 0,
+SELECT first_name, IFNULL(title, 'MISSING'), IFNULL(grade, 0) FROM students
+LEFT JOIN papers ON students.id = papers.student_id;
+-- first_name(samantha, carlos, caleb, raj, lisa), average(96.000, 89.000, 67.500, 0, 0)
+SELECT first_name, IFNULL(AVG(grade), '0') FROM students
+LEFT JOIN papers ON students.id = papers.student_id GROUP BY first_name ORDER BY grade DESC;
+-- print wheather its passing grade or not. first_name, average, passing_status < 75 = FAILING , PASSING
+SELECT first_name, IFNULL(AVG(grade), '0') AS average,
+CASE
+WHEN  IFNULL(AVG(grade), '0') >=75 THEN 'PASSING'
+ELSE'FAILING'
+END AS passing_status
+ FROM students
+LEFT JOIN papers ON students.id = papers.student_id GROUP BY first_name ORDER BY average DESC;
+
+					-- -------------------------- MANY TO MANY JOINS ------------------------------------ book can be written by many author, a author may write more than one book
+-- for instance, students-classes,  books-authors,  blog post-tags 
+-- imagine we re building tv show reviewing application. key idea is that we can have someone who can be reviewer who signs up as a reviewer.
+--  and a reviewer can then rate any of those series like 8.5 out of ten
+-- series data, reviews data, reviewers data  (series and reviewers data associated through reviews table)
+-- reviews table: called centralized repository or centralized place for our information to be stored. table gonna be only numbers so it can be replace with title of series and reviewer id so  on .
+
+--   ---------------------------------------- TV SERIES CHALLANGE -------------------------------------------------
+CREATE DATABASE tv_show; use tv_show;
+CREATE TABLE reviewers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL );
+CREATE TABLE series (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100),
+    released_year YEAR,  -- !!
+    genre VARCHAR(100) );
+CREATE TABLE reviews (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    rating DECIMAL(2 , 1 ),
+    series_id INT,
+    reviewer_id INT,
+    FOREIGN KEY (series_id) REFERENCES series (id),
+    FOREIGN KEY (reviewer_id) REFERENCES reviewers (id) );
+    
+    INSERT INTO series (title, released_year, genre) VALUES
+    ('Archer', 2009, 'Animation'),
+    ('Arrested Development', 2003, 'Comedy'),
+    ("Bob's Burgers", 2011, 'Animation'),
+    ('Bojack Horseman', 2014, 'Animation'),
+    ("Breaking Bad", 2008, 'Drama'),
+    ('Curb Your Enthusiasm', 2000, 'Comedy'),
+    ("Fargo", 2014, 'Drama'),
+    ('Freaks and Geeks', 1999, 'Comedy'),
+    ('General Hospital', 1963, 'Drama'),
+    ('Halt and Catch Fire', 2014, 'Drama'),
+    ('Malcolm In The Middle', 2000, 'Comedy'),
+    ('Pushing Daisies', 2007, 'Comedy'),
+    ('Seinfeld', 1989, 'Comedy'),
+    ('Stranger Things', 2016, 'Drama');
+INSERT INTO reviewers (first_name, last_name) VALUES
+    ('Thomas', 'Stoneman'),
+    ('Wyatt', 'Skaggs'),
+    ('Kimbra', 'Masters'),
+    ('Domingo', 'Cortes'),
+    ('Colt', 'Steele'),
+    ('Pinkie', 'Petit'),
+    ('Marlon', 'Crafford');
+INSERT INTO reviews(series_id, reviewer_id, rating) VALUES
+    (1,1,8.0),(1,2,7.5),(1,3,8.5),(1,4,7.7),(1,5,8.9),
+    (2,1,8.1),(2,4,6.0),(2,3,8.0),(2,6,8.4),(2,5,9.9),
+    (3,1,7.0),(3,6,7.5),(3,4,8.0),(3,3,7.1),(3,5,8.0),
+    (4,1,7.5),(4,3,7.8),(4,4,8.3),(4,2,7.6),(4,5,8.5),
+    (5,1,9.5),(5,3,9.0),(5,4,9.1),(5,2,9.3),(5,5,9.9),
+    (6,2,6.5),(6,3,7.8),(6,4,8.8),(6,2,8.4),(6,5,9.1),
+    (7,2,9.1),(7,5,9.7),
+    (8,4,8.5),(8,2,7.8),(8,6,8.8),(8,5,9.3),
+    (9,2,5.5),(9,3,6.8),(9,4,5.8),(9,6,4.3),(9,5,4.5),
+    (10,5,9.9),
+    (13,3,8.0),(13,4,7.2),
+    (14,2,8.5),(14,3,8.9),(14,4,8.9);
+    
+    -- print left side title(series), right side rating(reviews) and get 15 result.
+    SELECT title, rating FROM series
+    INNER JOIN reviews ON series.id = reviews.series_id LIMIT 15; 
+    
+    -- print left side title, right side avg_rating, ORDER LOWEST DO HIGHEST .MY SOLUTION BELOW 
+    SELECT title, AVG(rating) AS avg_rating FROM series
+    INNER JOIN reviews ON series.id = reviews.series_id GROUP BY title ORDER BY avg_rating ASC; 
+				-- select ROUND(3.999); -- rounds to the nearest number but 
+    select ROUND(3.1245, 2); -- SAGA YAZDIGIN KADARINI ALIR.
+	SELECT title, ROUND(AVG(rating), 2) AS avg_rating FROM series -- virgulden sonraki decimali duzenlemek icin kullanilir. 
+    INNER JOIN reviews ON series.id = reviews.series_id GROUP BY title ORDER BY avg_rating ASC; 
+    
+    -- first_name, last_name , rating
+    SELECT first_name, last_name, rating FROM reviewers
+    INNER JOIN reviews ON reviewers.id = reviews.reviewer_id;
+    
+    -- identify series that no reviews as unreviewed_series(title) from title of series  we need left join cuz we want all the infos of series and check if there is null value for id
+    SELECT * FROM series 
+    LEFT JOIN reviews ON series.id = reviews.series_id; -- to minimize to unreviewed series we can check through id, rating, series_id, revieweer_id
+    
+    SELECT title AS unreviewed_series FROM series
+    LEFT JOIN reviews ON series.id = reviews.series_id WHERE rating  IS NULL;
+			-- solution with right join
+	SELECT title AS unreviewed_series FROM reviews RIGHT JOIN series ON series.id = reviews.series_id WHERE rating IS NULL;
+
+	-- genre, avg_rating , over all ratings of genres
+    SELECT genre, ROUND(AVG(rating), 5) FROM series 
+    INNER JOIN reviews ON series.id = reviews.series_id GROUP BY genre;
+
+	-- first_name,last_name(each reviewer), COUNT(number of reviews they left, MIN,MAX,AVG scores, STATUS(active, inactive) depending on user has left reviewer or not. if count =0 status inactive
+    SELECT first_name, last_name,     -- MY SOLUTION
+    IFNULL(COUNT(reviewer_id), '0') AS COUNT, 
+    IFNULL(MIN(rating), '0.0') AS MIN, 
+    IFNULL(MAX(rating), '0.0') AS MAX, 
+    IFNULL(AVG(rating), '0.00000') AS AVG,
+    CASE
+    WHEN IFNULL(COUNT(reviewer_id), '0') = '0' THEN 'INACTIVE'
+    ELSE 'ACTIVE'
+    END AS STATUS
+    FROM reviewers LEFT JOIN reviews ON reviewers.id = reviews.reviewer_id 
+    GROUP BY first_name, last_name;
+    -- solution using CASE
+    SELECT 
+    first_name,
+    last_name,
+    COUNT(rating) AS count,
+    IFNULL(MIN(rating), 0) AS min,
+    IFNULL(MAX(rating), 0) AS max,
+    ROUND(IFNULL(AVG(rating), 0), 2) AS average,
+    CASE
+        WHEN COUNT(rating) >= 10 THEN 'POWERUSER'
+        WHEN COUNT(rating) > 0 THEN 'ACTIVE'
+        ELSE 'INACTIVE'
+    END AS status
+FROM reviewers
+        LEFT JOIN reviews ON reviewers.id = reviews.reviewer_id
+GROUP BY first_name , last_name;
+ 
+-- Solution using IF 
+SELECT 
+    first_name,
+    last_name,
+    COUNT(rating) AS count,
+    IFNULL(MIN(rating), 0) AS min,
+    IFNULL(MAX(rating), 0) AS max,
+    ROUND(IFNULL(AVG(rating), 0), 2) AS average,
+    IF(COUNT(rating) > 0,
+        'ACTIVE',
+        'INACTIVE') AS status
+FROM reviewers
+        LEFT JOIN reviews ON reviewers.id = reviews.reviewer_id
+GROUP BY first_name , last_name;
+
+    -- title, rating, reviewer(first_name, last name ) 	 -- 2 join required to solve 
+    -- as long as you connect the tables with join, order doesnt matter.
+    SELECT title, rating, CONCAT(first_name, ' ', last_name)  AS reviewer FROM reviews -- we can do here like from series or reviewers as well. since we connect them, no problem.
+    INNER JOIN series ON series.id = reviews.series_id 
+	INNER JOIN reviewers ON reviewers.id = reviews.reviewer_id ORDER BY title;
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
