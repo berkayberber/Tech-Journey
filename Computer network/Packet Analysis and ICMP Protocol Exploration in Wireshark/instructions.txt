@@ -1,0 +1,66 @@
+Task 1
+2-) [Picture 1].
+4-) [Picture 2].
+5-) [Task1.pcapng].
+6-) PC1 = 192.168.0.13, PC2 = 192.168.0.11, Frame number is 69.
+7-) Source IPv4 address: 192.168.0.11
+Destination IPv4 address: 192.168.0.13
+TTL field value: ttl = 128
+ICMP packet types:
+
+Echo (ping) reply (type 0)
+Echo (ping) request (type 8)
+Size of ICMP data field: 32 bytes
+ICMP request contains Ether, IP, and ICMP layers.
+8-) Open [Picture 3], shows Wireshark capture and connectivity test to google.com.
+9-) Open Task1.2.pcapng.
+10-) Frame number: 1010
+Source IPv4 address: 172.217.21.238
+Destination IPv4 address: 192.168.1.40
+TTL field value: ttl = 117
+ICMP packet types:
+Echo (ping) reply (type 0)
+Echo (ping) request (type 8)
+Max ICMP data size: 1470 bytes
+Task 2
+2-) We changed with given instructions.
+5-) We saved the file. Open Task2.pcapng.
+6-) PC1 = 2001:db8::12, PC2 = 2001:db8::11, Frame number is 2.
+7-) Source IPv6 address: 2001:db8::11
+Destination IPv6 address: 2001:db8::12
+Hop limit value: hop limit = 128
+ICMPv6 packet types:
+
+Echo (ping) reply (type 129)
+Echo (ping) request (type 128)
+ICMPv6 data field:
+Type: Echo reply (129)
+Code: 0
+Checksum: 0x784d
+8-) We did. Open [Picture 4].
+9-) Open Task2.2.pcapng.
+10-) Frame number: 58
+Source IPv6 address: 2001:db8::11
+Destination IPv6 address: 2001:db8::12
+Hop limit value: hop limit = 128
+ICMPv6 packet types:
+Echo reply (type 129)
+Echo request (type 128)
+Max ICMPv6 data size: 1400 bytes
+Data field: 6162636465666768696a6b6c6d6e6f707172737475767761…
+Task 3
+5-) Open Task3.pcapng and [Picture 5].
+6-) Request frame: 3804, Reply frame: 3811.
+7-) Source IPv4 address: 192.168.1.40
+Destination IPv4 address: 8.8.8.8
+TTL value: ttl = 11
+ICMP packet types:
+
+Echo request (type 8)
+Echo reply (type 0)
+ICMP data field size: 64 bytes
+8-) Source IPv4 address: 8.8.8.8
+Destination IPv4 address: 192.168.1.40
+TTL value: ttl = 113
+ICMP data field size: 64 bytes
+9-) Traceroute explanation: Intermediate nodes respond to traceroute packets to help locate network issues. They assist in pinpointing where the problem exists.

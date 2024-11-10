@@ -1,0 +1,135 @@
+
+PC1
+
+C:\>ipconfig /all
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..: 
+   Physical Address................: 000C.85A8.5B23
+   Link-local IPv6 Address.........: FE80::20C:85FF:FEA8:5B23
+   IPv6 Address....................: ::
+   IPv4 Address....................: 192.168.1.11
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     0.0.0.0
+   DHCP Servers....................: 0.0.0.0
+   DHCPv6 IAID.....................: 
+   DHCPv6 Client DUID..............: 00-01-00-01-0C-0C-61-8B-00-0C-85-A8-5B-23
+   DNS Servers.....................: ::
+                                     0.0.0.0
+
+PC2
+
+C:\>ipconfig /all
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..: 
+   Physical Address................: 0001.96E9.73C4
+   Link-local IPv6 Address.........: FE80::201:96FF:FEE9:73C4
+   IPv6 Address....................: ::
+   IPv4 Address....................: 192.168.1.12
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     0.0.0.0
+   DHCP Servers....................: 0.0.0.0
+   DHCPv6 IAID.....................: 
+   DHCPv6 Client DUID..............: 00-01-00-01-C0-2E-03-17-00-01-96-E9-73-C4
+   DNS Servers.....................: ::
+                                     0.0.0.0
+
+--- Clean the mac address table.
+S_X#clear mac address-table dynamic
+Check the mac table, it is realy empty?
+Yes It is empty.
+----Which entries still exists?
+Its completely empty.
+
+---- Check communication between PC1 and PC2 and the switch
+---Check mac address table.
+
+
+S_1#show mac address-table
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+  99    0001.96e9.73c4    STATIC      Fa0/1
+  99    000c.85a8.5b23    DYNAMIC     Fa0/1
+  99    000c.cfa7.4b01    DYNAMIC     Fa0/23
+
+---Is communication PC1 - switch possible? Why?
+Yes Because its dynamic and no problem here
+
+---Is communicatio PC2 - switch possible? Why?
+No because there is same ports in the static and dynamic 
+
+--- Swap the computer cables connected to switch
+--Check communication between PC1 and PC2 and the switch
+Did something change?
+---Check the content of the mac table.
+
+
+S_1#show mac address-table
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+  99    0001.96e9.73c4    STATIC      Fa0/1
+  99    000c.85a8.5b23    DYNAMIC     Fa0/11
+  99    000c.cfa7.4b01    DYNAMIC     Fa0/23
+
+---Can communication from PC1 be possible, why?
+Yes because after change the cables ports are back to normal.
+
+Can communication from PC2 be possible, why?
+Yes because after change the cables ports are back to normal.
+
+--- Delete the static entry and check configuration
+It didnt found
+
+----Check contents of the mass address table.
+S_1#show mac address-table
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+  99    0001.96e9.73c4    DYNAMIC     Fa0/1
+  99    000c.cfa7.4b01    DYNAMIC     Fa0/23
+
+---Check communication between PC1, PC2 and switch.
+Everything is working.
+
+---Swap computer cables on the switch to correct ports.Test the connections.
+We did and Its still working.
+
+
+Task2
+
+---Check the configuration of PC1 port
+
+It the interface enabled? Yes
+How to enable it?
+Check port MAC address. 0060.5c06.2c01
+Check the speed and duplex mode.Full-duplex, 100Mb/s
+
+----Configure the Fa 0/1 port security. Allow only two sticky secure mac addresses. Use the restrict mode of port security.
+
+S_1#show port-security
+Secure Port MaxSecureAddr CurrentAddr SecurityViolation Security Action
+               (Count)       (Count)        (Count)
+--------------------------------------------------------------------
+        Fa0/1        2          1                 0         Restrict
+----------------------------------------------------------------------
+
+
+
+
+

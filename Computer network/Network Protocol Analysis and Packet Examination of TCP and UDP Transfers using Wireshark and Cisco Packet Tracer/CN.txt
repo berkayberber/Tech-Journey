@@ -1,0 +1,39 @@
+Task1
+
+7-)Open Picture1
+8-)Open Task1.pcapng
+9a-)Frames corresponding for establishing the TCP connection "879,880,881"
+9b-)Name="1025" and Pass="1425"
+9c-)Frames with directory listing – should contain list of FTP server files in TCP data part"1665,1666,1667"
+9d-)
+9e-)"3823,3824,3825,3826"
+10-)TCP = Transmission Control Protocol
+
+Task2
+
+7-)Open Picture2
+8-)Open Task2.pcapng
+9-a,b,c,e) we cant find in tftp
+9d-)Frames containing copied file,should contain the user name in UDP data part."6916,6917,6915"
+10-)UDP – User Datagram Protocol
+
+Task3
+TCP transfer;
+4-)We used ios image bin. (c7200p-advipservicesk9-mz.152-4.S5)
+8-)Open Task3.1.pcapng and picture3.1
+9a-)Which default ports (find two) are used by the FTP protocol (number <1024):20,21
+9b-) Maximum data frames sent without any acknowledgement:5411
+9c-)Find the data frames (fragment of file) and the corresponding ACK confirmation for this data: 5406[5407]
+9d-)What is the size of the TCP window set by the FTP server and the FTP client? 65475
+9e-)Using TCP Window calculate the maximum number of frames the FTP server could send without
+confirmation?
+
+
+UDP transfer;
+11-)We used ios image bin. (c7200p-advipservicesk9-mz.152-4.S5)
+14-)Open Task3.2.pcapng and picture3.2
+15a-)Which default ports are used by the TFTP protocol (number <1024): 69
+15b-)Maximum number of data frames sent without acknowledgement?:1
+15c-)Find the data frames (fragment of file) and the corresponding ACK confirmation for this data.3968
+15d-)Calculate the maximum number of frames the TFTP server could send without confirmation:1
+15e-)How does the TFTP protocol ensure error-free data transmission? Other layers of the OSI model deal with error correction.

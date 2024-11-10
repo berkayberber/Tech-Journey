@@ -1,0 +1,106 @@
+Exercise Scenario:
+
+Task 1
+
+2-) Write down the names and types of PC interfaces.
+
+command line (cli)
+graphical user interface (GUI)
+menu driven (mdi)
+form based (fbi)
+natural language (nli)
+
+3-) Check and write down the switch port numbers to which the PC_X1 and PC_X2 are connected.
+PC_X1 Cisco NIC port connected with straight cable to S_X port Fa0 / 1.
+PC_X2 Cisco port NIC connected with straight cable to S_X port Fa0 / 11.
+
+4-) Check and write down the numbers of devices to which the console cables of PC_X1 and PC_X2 are connected.
+PC_X1 COM port 1 connected with console cable to R_X CON port 0.
+PC_X2 COM port 1 connected by a console cable to S_X CON CON port 0.
+
+5-) Check and save the IP configuration of PC interfaces.
+PC_X1: 192.168.1.11 255.255.255.0 , gateway 192.168.1.10
+PC_X2: 192.168.1.12 255.255.255.0 , gateway 192.168.1.10
+
+Task 2
+
+3-) Check and write down the physical addresses of the PC network interfaces. Use the ipconfig command.
+We used Hamachi with my partner.
+
+PC1- 7A-79-19-10-38-FA
+PC2- 7A-79-19-10-65-41
+
+7-) Done
+
+8-) Find in the listing the Ethernet frame sent from the computer PC_X1 to PC_X2. Note the frame number (ID).
+Frame number is "1418".
+[Picture 1]
+
+9-) Header fields and their size in Bytes:
+
+Frame => 74 bytes
+EthernetII => 14 bytes
+Internet Protocol Version 4 => 20 bytes
+Internet Control Message Protocol => 40 bytes
+The size of the data field of the Ethernet frame is 46-1500 (60) bytes.
+The data field of the Ethernet frame consists of upper layer headers such as TCP/IP or IPX and then the actual user data.
+
+PC1 => 7a:79:19:10:38
+, PC2 => 7a:79:19:10:65:41
+
+10-) Compare the physical addresses of the PCs with the addresses listed in the Ethernet frame.
+It is the same.
+
+Task 3
+
+3-) Check and write down the physical addresses of the PC's external network interfaces ("Internet").
+
+Physical Address PC1 => B8-08-CF-9F-53-53
+Physical Address PC2 => B8-86-87-D0-5F-C9
+
+4-) Display and save the contents of the ARP cache table.
+It didn’t delete.
+
+sql
+Kodu kopyala
+C:\Windows\system32>arp -a
+Interface: 192.168.1.40 --- 0x12
+  Internet Address      Physical Address      Type
+  192.168.1.1           ac-84-c9-24-cd-2a     dynamic
+  192.168.1.38          b8-86-87-d0-5f-c9     dynamic
+  192.168.1.255         ff-ff-ff-ff-ff-ff     static
+  224.0.0.2             01-00-5e-00-00-02     static
+  224.0.0.22            01-00-5e-00-00-16     static
+  224.0.0.251           01-00-5e-00-00-fb     static
+  224.0.0.252           01-00-5e-00-00-fc     static
+  239.255.255.250       01-00-5e-7f-ff-fa     static
+Perform a connectivity test between PC1 and PC2. Use addresses from external interfaces:
+We used our Hamachi IP.
+8-) Save the Wireshark printout to your user directory.
+[Picture 2]
+
+9-) Find ARP frames sent from and to PC_X1 inside the listing.
+
+To make the task easier, apply the Wireshark filter with the keyword "arp".
+Save the ARP frame numbers.
+Frames: 151 and 152
+10-) Save what source and target MAC addresses were used.
+
+Sender MAC address: 7a:79:19:10:65:41
+Target MAC address: 7a:79:19:10:38
+What is in the ARP answer?
+Address Resolution Protocol (ARP) hovers in the shadows of most networks. Because of its simplicity, by comparison to higher layer protocols, ARP rarely intrudes upon the network administrator's routine. All modern IP-capable operating systems provide support for ARP. The uncommon alternative to ARP is static link-layer-to-IP mappings.
+
+13-) Done
+[Picture 3]
+
+15-) In Wireshark, find and note the numbers of frames sent to external hosts.
+
+Frames: 1994, 3074, 6222
+16-) What target MAC addresses have been entered into the Ethernet frame headers?
+
+Target MAC address: IntelCor_9f:53:53 (b8:08:cf:9f:53:53)
+Target MAC address: LiteonTe_d0:5f
+(b8:86:87:d0:5f
+)
+Target MAC address: Sagemcom_24:cd:2a (ac:84:c9:24:cd:2a)
